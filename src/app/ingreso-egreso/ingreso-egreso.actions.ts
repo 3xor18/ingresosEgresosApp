@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
-import { User } from './user.model';
+import { IngresoEgreso } from './ingreso-egreso.model';
 
 /**
  * For each action type in an action group, make a simple
  * enum object for all of this group's action types.
  */
 export enum ClassActionTypes {
-    SET_USER = '[Auth] SetUser',
-    UNSET_USER = '[Auth] UNSetUser'
+    SET_ITEMS = '[Ingreso-Egreso] Set Items',
+    UNSET_ITEMS = '[Ingreso-Egreso] UNSet Items',
 };
 
 /**
@@ -15,20 +15,20 @@ export enum ClassActionTypes {
  * payload. Expressing actions as classes enables powerful 
  * type checking in reducer functions.
  */
-export class setUserActions implements Action {
-    readonly type = ClassActionTypes.SET_USER;
+export class SetitemsActions implements Action {
+    readonly type = ClassActionTypes.SET_ITEMS;
 
-    constructor(public user: User) { }
+    constructor(public items: IngresoEgreso[]) { }
 }
 
-export class UnsetUserAction implements Action {
-    readonly type = ClassActionTypes.UNSET_USER;
+export class UnSetItemsActions implements Action {
+    readonly type = ClassActionTypes.UNSET_ITEMS;
 }
-
 
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
 export type Acciones
-    = setUserActions | UnsetUserAction;
+    = SetitemsActions
+    | UnSetItemsActions;

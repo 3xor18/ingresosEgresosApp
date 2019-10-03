@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService {
   private userSuscription: Subscription = new Subscription();
+  private usuario: User;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
@@ -30,8 +31,10 @@ export class AuthService {
           .subscribe((usuarioObj: any) => {
             const newUser = new User(usuarioObj);
             this.store.dispatch(new fromAuth.setUserActions(newUser))
+            this.usuario = newUser;
           })
       } else {
+        this.usuario = null;
         this.userSuscription.unsubscribe();
       }
     })
@@ -84,6 +87,7 @@ export class AuthService {
     Swal.fire('Bye Bye',
       'Hasta la Vista Baby!',
       'success')
+    this.store.dispatch(new fromAuth.UnsetUserAction())
     this.router.navigate(['login']);
   }
 
@@ -95,5 +99,9 @@ export class AuthService {
       }
       )
     );
+  }
+
+  getUsuario() {
+    return { ...this.usuario }
   }
 }

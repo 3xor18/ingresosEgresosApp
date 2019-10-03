@@ -19,6 +19,12 @@ export function reducer(state = initialState, action: fromAuth.Acciones): AuthSt
             };
         }
 
+        case fromAuth.ClassActionTypes.UNSET_USER: {
+            return {
+                user: null
+            };
+        }
+
         default: {
             return state;
         }
